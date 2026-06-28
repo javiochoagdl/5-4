@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5/4; — Issue 001</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #F2F0ED;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 28px;
+      z-index: 100;
+    }
+
+    .logo-wrap {
+      position: fixed;
+      left: 28px;
+      top: 42%;
+      transform: translateY(-50%);
+      z-index: 999;
+      pointer-events: none;
+    }
+
+    .logo {
+      pointer-events: auto;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(80px, 12vw, 160px);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: #1c1c1c;
+      opacity: 0.12;
+      text-decoration: none;
+      transition: color 0.4s ease;
+    }
+
+    .logo-wrap.white .logo {
+      color: #fff;
+    }
+
+    .nav-menu {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 22px;
+      z-index: 100;
+    }
+
+    .nav-menu a {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #1c1c1c;
+      text-decoration: none;
+      text-transform: lowercase;
+      line-height: 1;
+      transition: opacity 0.2s ease, color 0.4s ease;
+    }
+
+    .nav-menu a:hover {
+      opacity: 0.45;
+    }
+
+    .nav-menu.white a {
+      color: #fff;
+    }
+
+    /* SECTION 1 — cover */
+    .section-cover {
+      min-height: calc(100vh - 90px);
+      padding-top: 100px;
+      padding-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      background-color: #F2F0ED;
+    }
+
+    .title-block {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .title-block .issue-label {
+      font-size: clamp(14px, 1.6vw, 22px);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #1c1c1c;
+      line-height: 1.25;
+    }
+
+    .title-block .issue-title {
+      font-size: clamp(30px, 4vw, 50px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #1c1c1c;
+      line-height: 1.25;
+    }
+
+    .location {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: #1c1c1c;
+      text-align: center;
+    }
+
+    .cover-wrap {
+      position: relative;
+      width: min(420px, 60vw);
+      cursor: pointer;
+    }
+
+    .cover {
+      display: block;
+      width: 100%;
+      transition: opacity 0.4s ease;
+    }
+
+    .cover-hover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      filter: brightness(0.6);
+      object-position: center 60%;
+      transition: opacity 0.4s ease;
+    }
+
+    .cover-dark {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .cover-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      font-size: clamp(11px, 1.2vw, 15px);
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .cover-wrap:hover .cover { opacity: 0; }
+    .cover-wrap:hover .cover-hover { opacity: 1; }
+    .cover-wrap:hover .cover-dark { opacity: 1; }
+    .cover-wrap:hover .cover-label { opacity: 1; }
+
+    /* SECTION 2 — video scene (sticky reveal) */
+    .section-video-wrapper {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .scene-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    /* dark overlay */
+    .scene-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+    }
+
+    /* play button */
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 72px;
+      height: 72px;
+      border: 1.5px solid rgba(255,255,255,0.85);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .play-btn:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: #fff;
+    }
+
+    .play-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: rgba(255,255,255,0.9);
+      margin-left: 4px;
+    }
+
+    .scene-bottom {
+      position: absolute;
+      bottom: 36px;
+      left: 0;
+      right: 0;
+      padding: 0 40px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .scene-info h2 {
+      font-style: italic;
+      font-size: clamp(22px, 2.8vw, 38px);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .scene-info p {
+      font-size: clamp(13px, 1.1vw, 16px);
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.55;
+      max-width: 480px;
+    }
+
+    .scene-credits {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .scene-credits .credit-row {
+      display: flex;
+      gap: 32px;
+      align-items: baseline;
+      justify-content: flex-end;
+    }
+
+    .scene-credits .credit-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .scene-credits .credit-name {
+      font-size: clamp(20px, 2vw, 28px);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: #fff;
+    }
+
+    .section-back {
+      background-color: #F2F0ED;
+      background-image: url('img/colorfondo.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 80px 40px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .section-back img {
+      width: min(680px, 88vw);
+      display: block;
+    }
+
+    /* spacer that pushes the sticky section */
+    .section-video-spacer {
+      height: 100vh;
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-wrap">
+    <a class="logo" href="#">5/4</a>
+  </div>
+  <nav class="nav-menu">
+    <a href="#">archive</a>
+    <a href="#">films</a>
+    <a href="#">restaurants</a>
+    <a href="#">the dishes</a>
+    <a href="#">about 5/4</a>
+  </nav>
+
+  <!-- COVER SECTION -->
+  <section class="section-cover">
+    <div class="title-block">
+      <p class="issue-label">ISSUE 001</p>
+      <p class="issue-title">EL MIRADOR DE DEYO.</p>
+    </div>
+    <div class="cover-wrap">
+      <img class="cover" src="img/mirador-cover.jpg" alt="El Mirador de Deyo">
+      <img class="cover-hover" src="img/mirador-hover.jpg" alt="">
+      <div class="cover-dark"></div>
+      <span class="cover-label">See editorial</span>
+    </div>
+  </section>
+
+  <!-- VIDEO SCENE — sticky reveal -->
+  <div class="section-video-spacer">
+    <div class="section-video-wrapper">
+      <img class="scene-img" src="img/dining-scene.png" alt="Dining scene">
+      <div class="scene-overlay"></div>
+      <div class="play-btn" aria-label="Reproducir">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
+      <div class="scene-bottom">
+        <div class="scene-info">
+          <h2>Los Imprevistos</h2>
+          <p>A 5/4 writer tells anecdotes of Michelin inspectors,<br>meanwhile, the restaurant plays an important role.</p>
+        </div>
+        <div class="scene-credits">
+          <div class="credit-row">
+            <span class="credit-label">Starring</span>
+            <span class="credit-name">Pablo Fernandez</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const menu = document.querySelector('.nav-menu');
+    const logo = document.querySelector('.logo-wrap');
+    const cover = document.querySelector('.section-cover');
+
+    window.addEventListener('scroll', () => {
+      const coverBottom = cover.getBoundingClientRect().bottom;
+      if (coverBottom < window.innerHeight * 0.5) {
+        menu.classList.add('white');
+        logo.classList.add('white');
+      } else {
+        menu.classList.remove('white');
+        logo.classList.remove('white');
+      }
+    });
+  </script>
+
+  <!-- BACK SECTION -->
+  <section class="section-back">
+    <img src="img/back.jpg" alt="">
+  </section>
+
+</body>
+</html>
