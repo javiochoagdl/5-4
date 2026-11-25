@@ -3,64 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>5/4; — Issue 001</title>
+  <title>5/4 — Relato 001 · El Mirador de Deyo</title>
+  <meta name="description" content="Un restaurante en dos tiempos: como fondo de un cortometraje y como protagonista de una editorial. Relato 001: El Mirador de Deyo, Villamayor de Monjardín.">
+  <meta property="og:title" content="5/4 — Relato 001 · El Mirador de Deyo">
+  <meta property="og:description" content="Un restaurante en dos tiempos: como fondo de un cortometraje y como protagonista de una editorial.">
+  <meta property="og:image" content="https://5editorial4.com/img/mirador-cover.jpg">
+  <meta property="og:url" content="https://5editorial4.com/">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --papel: #E4E4E4;
+      --tinta: #000000;
+      --gris: #555555;
+      --hueco: #D3D3D3;
+      --display: 'Libre Caslon Display', Georgia, serif;
+      --texto: 'Libre Caslon Text', Georgia, serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      background-color: #F2F0ED;
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      background: var(--papel);
+      color: var(--tinta);
+      font-family: var(--texto);
       -webkit-font-smoothing: antialiased;
     }
 
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 28px;
-      z-index: 100;
-    }
+    a { color: inherit; }
 
+    /* ---------- Logo y menú fijos ---------- */
     .logo-wrap {
       position: fixed;
       left: 28px;
       top: 42%;
       transform: translateY(-50%);
-      z-index: 999;
+      z-index: 50;
       pointer-events: none;
     }
-
     .logo {
       pointer-events: auto;
-      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-family: var(--display);
       font-size: clamp(80px, 12vw, 160px);
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      color: #1c1c1c;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--tinta);
       opacity: 0.12;
       text-decoration: none;
       transition: color 0.4s ease;
     }
-
-    .logo-wrap.white .logo {
-      color: #fff;
-    }
+    .white .logo { color: #fff; }
 
     .nav-menu {
       position: fixed;
@@ -71,340 +67,436 @@
       flex-direction: column;
       align-items: flex-end;
       gap: 22px;
-      z-index: 100;
+      z-index: 50;
     }
-
     .nav-menu a {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 18px;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      color: #1c1c1c;
+      font-size: 16px;
       text-decoration: none;
-      text-transform: lowercase;
       line-height: 1;
       transition: opacity 0.2s ease, color 0.4s ease;
     }
+    .nav-menu a:hover { opacity: 0.45; }
+    .nav-menu.white a { color: #fff; }
 
-    .nav-menu a:hover {
-      opacity: 0.45;
-    }
-
-    .nav-menu.white a {
-      color: #fff;
-    }
-
-    /* SECTION 1 — cover */
+    /* ---------- 1 · Portada ---------- */
     .section-cover {
-      min-height: calc(100vh - 90px);
-      padding-top: 100px;
-      padding-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 100px 24px 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
-      z-index: 1;
-      background-color: #F2F0ED;
+      background: var(--papel);
     }
-
-    .title-block {
-      text-align: center;
-      margin-bottom: 80px;
-    }
-
-    .title-block .issue-label {
-      font-size: clamp(14px, 1.6vw, 22px);
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      color: #1c1c1c;
-      line-height: 1.25;
-    }
-
-    .title-block .issue-title {
-      font-size: clamp(30px, 4vw, 50px);
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      color: #1c1c1c;
-      line-height: 1.25;
-    }
-
-    .location {
-      margin-top: 20px;
-      font-size: 16px;
+    .title-block { text-align: center; margin-bottom: 56px; }
+    .title-block .issue-label { font-size: 14px; line-height: 1.4; color: var(--gris); margin-bottom: 12px; }
+    .title-block h1 {
+      font-family: var(--display);
       font-weight: 400;
-      letter-spacing: 0.05em;
-      color: #1c1c1c;
-      text-align: center;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.05;
     }
+    .title-block .location { margin-top: 14px; font-size: 14px; line-height: 1.4; }
 
     .cover-wrap {
       position: relative;
-      width: min(420px, 60vw);
-      cursor: pointer;
-    }
-
-    .cover {
       display: block;
-      width: 100%;
-      transition: opacity 0.4s ease;
+      width: min(420px, 70vw);
+      text-decoration: none;
     }
-
+    .cover { display: block; width: 100%; height: auto; }
     .cover-hover {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 60%;
       opacity: 0;
       filter: brightness(0.6);
-      object-position: center 60%;
       transition: opacity 0.4s ease;
     }
-
-    .cover-dark {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.3);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
     .cover-label {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 16px;
       opacity: 0;
       transition: opacity 0.4s ease;
-      font-size: clamp(11px, 1.2vw, 15px);
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.9);
     }
+    .cover-wrap:hover .cover-hover,
+    .cover-wrap:hover .cover-label,
+    .cover-wrap:focus-visible .cover-hover,
+    .cover-wrap:focus-visible .cover-label { opacity: 1; }
 
-    .cover-wrap:hover .cover { opacity: 0; }
-    .cover-wrap:hover .cover-hover { opacity: 1; }
-    .cover-wrap:hover .cover-dark { opacity: 1; }
-    .cover-wrap:hover .cover-label { opacity: 1; }
-
-    /* SECTION 2 — video scene (sticky reveal) */
+    /* ---------- 2 · Corto (fijo, la siguiente sección lo tapa) ---------- */
+    .section-video-spacer { height: 100vh; position: relative; z-index: 2; }
     .section-video-wrapper {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      width: 100%;
+      position: sticky; top: 0;
+      height: 100vh; width: 100%;
       overflow: hidden;
-      z-index: 2;
+      background: #000;
     }
-
     .scene-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center center;
     }
+    .scene-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.35); }
 
-    /* dark overlay */
-    .scene-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.35);
-    }
-
-    /* play button */
     .play-btn {
-      position: absolute;
-      top: 50%;
-      left: 50%;
+      position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 72px;
-      height: 72px;
+      width: 76px; height: 76px;
       border: 1.5px solid rgba(255,255,255,0.85);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
       cursor: pointer;
       transition: background 0.3s ease, border-color 0.3s ease;
     }
-
-    .play-btn:hover {
-      background: rgba(255,255,255,0.15);
-      border-color: #fff;
-    }
-
-    .play-btn svg {
-      width: 22px;
-      height: 22px;
-      fill: rgba(255,255,255,0.9);
-      margin-left: 4px;
-    }
+    .play-btn:hover, .play-btn:focus-visible { background: rgba(255,255,255,0.15); border-color: #fff; }
+    .play-btn svg { width: 22px; height: 22px; fill: #fff; margin-left: 4px; }
 
     .scene-bottom {
-      position: absolute;
-      bottom: 36px;
-      left: 0;
-      right: 0;
+      position: absolute; left: 0; right: 0; bottom: 36px;
       padding: 0 40px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-    }
-
-    .scene-info h2 {
-      font-style: italic;
-      font-size: clamp(22px, 2.8vw, 38px);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      display: flex; flex-wrap: wrap; gap: 24px;
+      align-items: flex-end; justify-content: space-between;
       color: #fff;
-      line-height: 1.1;
+    }
+    .scene-info .kicker { font-size: 14px; opacity: 0.8; margin-bottom: 8px; }
+    .scene-info h2 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(28px, 3.4vw, 44px);
+      line-height: 1.05;
       margin-bottom: 10px;
     }
+    .scene-info p { font-style: italic; font-size: 16px; line-height: 1.5; max-width: 460px; opacity: 0.85; }
+    .scene-credits { text-align: right; }
+    .scene-credits .credit-label { font-size: 14px; opacity: 0.7; }
+    .scene-credits .credit-name { font-family: var(--display); font-size: clamp(20px, 2vw, 28px); }
 
-    .scene-info p {
-      font-size: clamp(13px, 1.1vw, 16px);
-      font-weight: 400;
-      font-style: italic;
-      color: rgba(255,255,255,0.8);
-      line-height: 1.55;
-      max-width: 480px;
+    /* reproductor a pantalla completa */
+    .player {
+      position: fixed; inset: 0;
+      z-index: 200;
+      background: #000;
+      display: none;
+      align-items: center; justify-content: center;
+    }
+    .player.open { display: flex; }
+    .player video { width: 100%; max-height: 100vh; }
+    .player-close {
+      position: absolute; top: 20px; right: 24px;
+      background: transparent; border: none;
+      color: #fff; font-family: var(--texto); font-size: 16px;
+      cursor: pointer; padding: 12px;
+      min-height: 44px;
     }
 
-    .scene-credits {
-      text-align: right;
-      white-space: nowrap;
-    }
-
-    .scene-credits .credit-row {
-      display: flex;
-      gap: 32px;
-      align-items: baseline;
-      justify-content: flex-end;
-    }
-
-    .scene-credits .credit-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-    }
-
-    .scene-credits .credit-name {
-      font-size: clamp(20px, 2vw, 28px);
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: #fff;
-    }
-
-    .section-back {
-      background-color: #F2F0ED;
-      background-image: url('img/colorfondo.png');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 80px 40px;
+    /* ---------- 3 · Editorial y resto (tapan el corto al subir) ---------- */
+    .after {
       position: relative;
       z-index: 3;
+      background: var(--papel);
+    }
+    .wrap { max-width: 1520px; margin: 0 auto; padding: 0 clamp(200px, 17vw, 260px); }
+
+    .g5 {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      column-gap: 40px;
+      row-gap: 96px;
+    }
+    .c3 { grid-column: 1 / span 3; }
+    .c2 { grid-column: 4 / span 2; }
+    .c5 { grid-column: 1 / -1; }
+    .a2 { grid-column: 1 / span 2; }
+    .b3 { grid-column: 3 / span 3; }
+
+    .label { font-size: 14px; font-weight: 400; line-height: 1.4; color: var(--gris); }
+    .h2 { font-family: var(--display); font-weight: 400; font-size: 32px; line-height: 1.3; }
+
+    .txt { font-size: 20px; line-height: 1.55; }
+    .txt p { margin-bottom: 1.1em; }
+    .txt p:last-child { margin-bottom: 0; }
+
+    /* Huecos de imagen: sustituir cada <div class="hueco"> por <img class="foto" src="img/..." alt="..."> */
+    .hueco {
+      background: var(--hueco);
+      display: flex; align-items: flex-end;
+      padding: 16px;
+    }
+    .hueco span { font-size: 14px; color: var(--gris); }
+    .foto { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .v { aspect-ratio: 2 / 3; }
+    .h { aspect-ratio: 3 / 2; }
+
+    .section-editorial { padding: 160px 0 0; }
+    .cierre { font-style: italic; }
+
+    .section-sobre { padding: 200px 0 0; }
+    .frase {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 1.3;
     }
 
-    .section-back img {
-      width: min(680px, 88vw);
-      display: block;
+    .creditos {
+      margin-top: 200px;
+      padding-top: 24px;
+      border-top: 1px solid var(--tinta);
+      row-gap: 16px;
+      font-size: 14px; line-height: 1.4;
+    }
+    .creditos ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+
+    .suscripcion { margin-top: 120px; row-gap: 16px; align-items: end; }
+    .suscripcion form { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+    .suscripcion label {
+      display: flex; flex-direction: column; gap: 8px;
+      flex: 1 1 260px;
+      font-size: 14px; color: var(--gris);
+    }
+    .suscripcion input {
+      font-family: var(--texto); font-size: 20px;
+      padding: 10px 0;
+      border: none; border-bottom: 1px solid var(--tinta);
+      background: transparent; color: var(--tinta);
+      border-radius: 0;
+    }
+    .suscripcion input:focus { outline: none; border-bottom-width: 2px; }
+    .suscripcion button {
+      min-height: 44px; padding: 0 20px;
+      background: var(--tinta); color: var(--papel);
+      border: none;
+      font-family: var(--texto); font-size: 14px;
+      cursor: pointer;
+    }
+    .suscripcion .aviso { grid-column: 3 / span 3; font-size: 14px; color: var(--gris); min-height: 20px; }
+
+    footer {
+      margin-top: 160px;
+      padding: 24px 0 40px;
+      border-top: 1px solid var(--tinta);
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;
+      font-size: 14px; line-height: 1.4;
+    }
+    footer .marca { font-family: var(--display); font-size: 18px; }
+
+    /* ---------- Móvil ---------- */
+    @media (max-width: 900px) {
+      .wrap { padding: 0 24px; }
+      .logo-wrap { display: none; }
+      .nav-menu {
+        top: auto; bottom: 0; left: 0; right: 0;
+        transform: none;
+        flex-direction: row; justify-content: center;
+        gap: 20px;
+        padding: 14px 16px;
+        background: var(--papel);
+        border-top: 1px solid var(--tinta);
+      }
+      .nav-menu.white { background: #000; border-top-color: #000; }
+      .nav-menu a { font-size: 14px; }
+      .g5 { grid-template-columns: minmax(0, 1fr); row-gap: 56px; }
+      .c3, .c2, .c5, .a2, .b3, .suscripcion .aviso { grid-column: 1 / -1; }
+      .txt { font-size: 18px; }
+      .h2, .frase { font-size: 26px; }
+      .scene-bottom { padding: 0 24px; bottom: 80px; }
+      .scene-credits { text-align: left; }
+      footer { padding-bottom: 80px; }
     }
 
-    /* spacer that pushes the sticky section */
-    .section-video-spacer {
-      height: 100vh;
-      position: relative;
-      z-index: 2;
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <div class="logo-wrap">
-    <a class="logo" href="#">5/4</a>
+  <div class="logo-wrap" id="logo">
+    <a class="logo" href="#inicio" aria-label="5/4, volver al inicio">5/4</a>
   </div>
-  <nav class="nav-menu">
-    <a href="#">archive</a>
-    <a href="#">films</a>
-    <a href="#">restaurants</a>
-    <a href="#">the dishes</a>
-    <a href="#">about 5/4</a>
+
+  <nav class="nav-menu" id="menu" aria-label="Secciones">
+    <a href="#corto">corto</a>
+    <a href="#editorial">editorial</a>
+    <a href="#sobre">sobre 5/4</a>
   </nav>
 
-  <!-- COVER SECTION -->
-  <section class="section-cover">
+  <!-- 1 · PORTADA -->
+  <section class="section-cover" id="inicio">
     <div class="title-block">
-      <p class="issue-label">ISSUE 001</p>
-      <p class="issue-title">EL MIRADOR DE DEYO.</p>
+      <p class="issue-label">Relato 001</p>
+      <h1>El Mirador de Deyo</h1>
+      <p class="location">Villamayor de Monjardín, Navarra</p>
     </div>
-    <div class="cover-wrap">
-      <img class="cover" src="img/mirador-cover.jpg" alt="El Mirador de Deyo">
-      <img class="cover-hover" src="img/mirador-hover.jpg" alt="">
-      <div class="cover-dark"></div>
-      <span class="cover-label">See editorial</span>
-    </div>
+    <a class="cover-wrap" href="#editorial">
+      <img class="cover" src="img/mirador-cover.jpg" alt="Portada del Relato 001: un coche por un camino entre campos de Navarra" width="2701" height="3375">
+      <img class="cover-hover" src="img/mirador-hover.jpg" alt="" aria-hidden="true">
+      <span class="cover-label">Ver editorial</span>
+    </a>
   </section>
 
-  <!-- VIDEO SCENE — sticky reveal -->
-  <div class="section-video-spacer">
+  <!-- 2 · CORTOMETRAJE -->
+  <div class="section-video-spacer" id="corto">
     <div class="section-video-wrapper">
-      <img class="scene-img" src="img/dining-scene.png" alt="Dining scene">
+      <img class="scene-img" src="img/escena-corto.jpg" alt="Fotograma del cortometraje: la fachada del Mirador de Deyo al anochecer">
       <div class="scene-overlay"></div>
-      <div class="play-btn" aria-label="Reproducir">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8 5v14l11-7z"/>
-        </svg>
-      </div>
+      <button class="play-btn" id="play" type="button" aria-label="Reproducir el cortometraje">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      </button>
       <div class="scene-bottom">
         <div class="scene-info">
+          <p class="kicker">Cortometraje</p>
           <h2>Los Imprevistos</h2>
-          <p>A 5/4 writer tells anecdotes of Michelin inspectors,<br>meanwhile, the restaurant plays an important role.</p>
+          <p>Un escritor de 5/4 cuenta anécdotas de inspectores gastronómicos; mientras, el restaurante espera en segundo plano.</p>
         </div>
         <div class="scene-credits">
-          <div class="credit-row">
-            <span class="credit-label">Starring</span>
-            <span class="credit-name">Pablo Fernandez</span>
-          </div>
+          <p class="credit-label">Protagonista</p>
+          <p class="credit-name">Pablo Fernández</p>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Reproductor. Cuando el corto esté en Vimeo, se puede cambiar el <video> por el <iframe> de Vimeo. -->
+  <div class="player" id="player" role="dialog" aria-modal="true" aria-label="Cortometraje Los Imprevistos">
+    <button class="player-close" id="close" type="button">Cerrar</button>
+    <video id="video" src="video/los-imprevistos.mp4" poster="img/escena-corto.jpg" controls playsinline preload="none"></video>
+  </div>
+
+  <!-- 3 · EDITORIAL, SOBRE 5/4 Y CIERRE -->
+  <div class="after">
+    <div class="wrap">
+
+      <article class="section-editorial g5" id="editorial" aria-labelledby="titulo-editorial">
+
+        <header class="c5" style="display:flex;flex-direction:column;gap:12px">
+          <span class="label">Editorial</span>
+          <h2 class="h2" id="titulo-editorial">El Mirador de Deyo</h2>
+        </header>
+
+        <div class="c3 txt">
+          <p>Cada noche se enciende la brasa bajo este mismo tejado. Hubo un tiempo en que la casa cobraba impuestos. Quienes vivían en los alrededores subían cada domingo por el mismo camino que hoy cruza el pueblo, cargados con grano y con lo poco que la tierra les daba en un año malo, para pagar el diezmo que correspondía a la parroquia. Alguien anotaba la cuenta, moneda a moneda. La piedra que hoy sostiene el comedor sostuvo entonces esa contabilidad.</p>
+        </div>
+        <div class="c2 hueco v"><span>Imagen 01</span></div>
+
+        <div class="a2 hueco v"><span>Imagen 02</span></div>
+        <div class="b3 txt" style="align-self:center">
+          <p>Le siguió otro tiempo: la casa cambió de oficio. Dejó de cobrar y empezó a guardar, convertida en bodega. Las uvas llegaban por el mismo camino, en carro, desde los viñedos que todavía rodean Villamayor de Monjardín, los mismos que hoy se ven desde las ventanas del hotel. Bajo el nivel de la calle, donde hoy se enfría el vino de la carta, siguen los muros de piedra que entonces contenían el mosto durante los meses de invierno, cuando el frío bajaba de la sierra y había que proteger la fermentación del hielo.</p>
+        </div>
+
+        <div class="c5 hueco h"><span>Imagen 03 · plano general</span></div>
+
+        <div class="c3 txt">
+          <p>Vino después una tercera época: la de la esparraguera. La tierra que rodea la casa dio espárragos durante años, uno de los cultivos que han definido esta parte de Navarra, en Tierra Estella. Cada primavera, el mismo camino se llenaba antes del amanecer, de quienes iban a cortarlos mientras aún estaban tiernos, con la tierra todavía húmeda del rocío. De aquella cosecha queda hoy poco más que el nombre con el que algunos vecinos todavía señalan la parcela. La cocina, sin saberlo, sigue el mismo compás: sirve lo que la tierra da, cuando lo da.</p>
+        </div>
+        <div class="c2 hueco h" style="align-self:end"><span>Imagen 04</span></div>
+
+        <div class="a2 hueco v"><span>Imagen 05</span></div>
+        <div class="b3 txt">
+          <p>La última vez que la casa cambió de oficio no fue por el pueblo, sino por dos personas que habían jugado en ella de pequeños. Daniel y Angélica Villar pasaron allí los veranos de la infancia, antes de que la vida los llevara fuera del pueblo. Años después, decidieron volver, y con ellos llegó la última identidad de la casa.</p>
+          <p>Junto a la casa, la iglesia románica lleva siglos mirando la misma fachada. Conservaron los muros originales, el escudo tallado sobre el dintel, el trazado de algunas de las habitaciones. Todo lo demás lo pensaron de nuevo, con materiales que no fingen ser antiguos. No quisieron borrar la historia de la casa: dejaron la piedra a la vista, conviviendo con lo nuevo. La fachada ya no cobra impuestos, ni guarda vino, ni ve pasar a nadie camino de los espárragos, pero las tres siguen en esos muros que decidieron conservar.</p>
+        </div>
+
+        <div class="c3 txt">
+          <p>De aquel proceso nació, hace algo más de un año, el Mirador de Deyo: un hotel de ocho habitaciones en Villamayor de Monjardín, a la sombra del castillo de Deyo y con vistas al valle de Santesteban. Fuera, una piscina y un pequeño spa ocupan el espacio donde antes se secaban las cosechas. La cocina quedó bajo la dirección de Govinda Pérez de Ciriza, que llegó tras haber dirigido el restaurante Molino de Urdániz en Taipéi, y bajo el asesoramiento del chef navarro David Yárnoz. En la sala principal, una parrilla a la vista ocupa el centro del espacio, el mismo fuego que no se apaga en toda la jornada de servicio; una segunda sala, acristalada, mira directamente al valle.</p>
+          <p>La carta cambia con las estaciones y trabaja con productores de la zona que cultivan verduras y hortalizas. El asador da espacio también a la carne y al pescado. Pero la tierra que antes daba espárragos sigue siendo huerta, y dirige, temporada tras temporada, lo que llega a la mesa. Cada pieza se asa sobre la brasa el tiempo justo, hasta que la piel se tuesta y la pulpa queda tierna por dentro. La sala no supera los sesenta comensales, y la cocina descansa dos días entre semana, el tiempo que necesita la despensa para volver a llenarse.</p>
+        </div>
+        <div class="c2 hueco v"><span>Imagen 06</span></div>
+
+        <div class="c5 hueco h"><span>Imagen 07 · plano general</span></div>
+
+        <div class="b3 txt">
+          <p class="cierre">Villamayor de Monjardín tiene poco más de cien habitantes. Por el camino que atraviesa el pueblo sigue llegando gente, día tras día, cada uno con su historia, su cultura, su motivo.</p>
+        </div>
+
+      </article>
+
+      <section class="section-sobre g5" id="sobre" aria-labelledby="titulo-sobre">
+        <div class="c5"><h2 class="label" id="titulo-sobre">Sobre 5/4</h2></div>
+        <div class="a2">
+          <img class="foto h" src="img/sobre.jpg" alt="Rodaje de 5/4: cámara al hombro en un jardín de Navarra">
+        </div>
+        <div class="b3" style="display:flex;flex-direction:column;gap:32px">
+          <p class="frase">Un restaurante en dos tiempos: como fondo de un cortometraje y como protagonista de una editorial.</p>
+          <div class="txt">
+            <p>5/4 es un proyecto editorial gastronómico. Cada Relato reúne dos piezas sobre un mismo restaurante. En el cortometraje, una ficción, el restaurante aparece de fondo, como un escenario más. En la editorial, que documenta el lugar real, pasa a primer plano: su historia, su gente, su cocina.</p>
+            <p>Las dos piezas se sostienen por separado, pero solo juntas cuentan el Relato completo. Toda ficción de 5/4 nace de un hecho real del lugar. Empezamos en Navarra, con la mirada puesta en restaurantes de toda España.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="creditos g5" aria-label="Créditos">
+        <p class="a2">Créditos</p>
+        <ul class="b3">
+          <li>Cortometraje · Los Imprevistos</li>
+          <li>Protagonista · Pablo Fernández</li>
+          <li>Dirección · [NOMBRES]</li>
+          <li>Editorial · [NOMBRES]</li>
+          <li>Fotografía · [NOMBRES]</li>
+        </ul>
+      </section>
+
+      <section class="suscripcion g5" aria-label="Próximo Relato">
+        <p class="a2 txt">Avísame del próximo Relato.</p>
+        <!-- Para activarlo: crear una lista en Brevo, Mailchimp o Buttondown y pegar su URL de envío en action. -->
+        <form class="b3" id="form" action="" method="post">
+          <label>Correo
+            <input type="email" name="email" placeholder="nombre@correo.com" required autocomplete="email">
+          </label>
+          <button type="submit">Enviar</button>
+        </form>
+        <p class="aviso" id="aviso" aria-live="polite"></p>
+      </section>
+
+      <footer>
+        <span class="marca">5/4</span>
+        <!-- Cuando exista, añadir aquí: <a href="https://instagram.com/...">Instagram</a> -->
+        <a href="mailto:[CORREO DE CONTACTO]">[CORREO DE CONTACTO]</a>
+      </footer>
+
     </div>
   </div>
 
   <script>
-    const menu = document.querySelector('.nav-menu');
-    const logo = document.querySelector('.logo-wrap');
-    const cover = document.querySelector('.section-cover');
+    // Logo y menú en blanco mientras el corto ocupa la pantalla
+    const menu = document.getElementById('menu');
+    const logo = document.getElementById('logo');
+    const cover = document.getElementById('inicio');
+    const after = document.querySelector('.after');
+    function tono() {
+      const h = window.innerHeight;
+      const sobreCorto = cover.getBoundingClientRect().bottom < h * 0.5 && after.getBoundingClientRect().top > h * 0.5;
+      menu.classList.toggle('white', sobreCorto);
+      logo.classList.toggle('white', sobreCorto);
+    }
+    window.addEventListener('scroll', tono, { passive: true });
+    tono();
 
-    window.addEventListener('scroll', () => {
-      const coverBottom = cover.getBoundingClientRect().bottom;
-      if (coverBottom < window.innerHeight * 0.5) {
-        menu.classList.add('white');
-        logo.classList.add('white');
-      } else {
-        menu.classList.remove('white');
-        logo.classList.remove('white');
+    // Reproductor
+    const player = document.getElementById('player');
+    const video = document.getElementById('video');
+    const play = document.getElementById('play');
+    const close = document.getElementById('close');
+    function abrir() { player.classList.add('open'); video.play(); close.focus(); }
+    function cerrar() { video.pause(); player.classList.remove('open'); play.focus(); }
+    play.addEventListener('click', abrir);
+    close.addEventListener('click', cerrar);
+    player.addEventListener('keydown', e => { if (e.key === 'Escape') cerrar(); });
+
+    // Suscripción: hasta que haya una herramienta conectada, no se guarda ningún correo
+    const form = document.getElementById('form');
+    form.addEventListener('submit', e => {
+      if (!form.getAttribute('action')) {
+        e.preventDefault();
+        document.getElementById('aviso').textContent = 'La suscripción estará disponible muy pronto.';
       }
     });
   </script>
-
-  <!-- BACK SECTION -->
-  <section class="section-back">
-    <img src="img/back.jpg" alt="">
-  </section>
 
 </body>
 </html>
